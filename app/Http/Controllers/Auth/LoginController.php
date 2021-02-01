@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -21,7 +22,6 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
@@ -36,7 +36,6 @@ class LoginController extends Controller
         return redirect('/product');
         }
     }
-
     /**
      * Create a new controller instance.
      *
@@ -58,7 +57,7 @@ class LoginController extends Controller
             
         ]);
 
-        if(Auth::user()->attempt(['email' => $request->email,'password' => $request->password, 'user_type' => 'Admin'], $request->get('remember'))){
+        if(User::where(['email' => $request->email,'password' => $request->password], $request->get('remember'))){
                 return redirect()->route('home');
             }
             return back()->withInput($request->only('email','remember'));

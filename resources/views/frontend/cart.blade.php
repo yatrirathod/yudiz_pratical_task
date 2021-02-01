@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-2 py-3">
-                <h5><a href="/" class="text-dark">Home</a> › Cart</h5>
+                <h5><a href="{{route('customer.productList')}}" class="text-dark">Home</a> › Cart</h5>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                                         <div class="col-md-12 text-center mb-3">
                                         <a class="font-weight-bold">Shipping</a>
                                         </div>
-                                        <input type="text" name="userName" class="form-control" placeholder="Enter User Name" style="width: 54%;margin-bottom: 3%;margin-left: 24%;">
+                                        <input type="text" name="userName" class="form-control" placeholder="Enter User Name" style="width: 54%;margin-bottom: 3%;margin-left: 24%;" required>
                                         <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" style="width: 54%;margin-bottom: 3%;margin-left: 24%;">
                                         <input type="text" name="email" class="form-control" placeholder="Enter Phone Email" style="width: 54%;margin-bottom: 3%;margin-left: 24%;">
                                         <textarea name="address" class="form-control" placeholder="Enter Shipping Address" style="width: 54%;margin-bottom: 3%;margin-left: 24%;"></textarea>
@@ -129,9 +129,9 @@
                                             <div class="col-md-12">
                                                 <div class="cart-checkout-btn text-center">
                                                     @if (Auth::user())
-                                                        <a href="{{ url('checkout') }}" class="btn btn-success btn-block checkout-btn" id="checkoutBtn">PROCCED TO CHECKOUT</a>
+                                                        <a href="{{ url('checkout') }}" class="btn btn-success btn-block checkout-btn" id="checkoutBtn" style="margin-bottom: 12px;">PROCCED TO CHECKOUT</a>
                                                     @else
-                                                        <a href="{{ url('login') }}" class="btn btn-success btn-block checkout-btn">PROCCED TO CHECKOUT</a>
+                                                        <a href="{{ url('login') }}" class="btn btn-success btn-block checkout-btn" style="margin-bottom: 12px;">PROCCED TO CHECKOUT</a>
                                                         {{-- you add a pop modal for making a login --}}
                                                     @endif
                                                 </div>

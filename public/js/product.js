@@ -128,4 +128,35 @@ $(document).ready(function(){
 			  }
 			});
 		});
+  	$("#prdTable").on('click', '.btn-status', function(){
+		var id = $(this).data("id");
+  		var status = $(this).data("status");
+  		var thiss = $(this);
+  		thiss.prop('value', 'Loading');
+  		$.ajax({
+		  "type": "GET",
+		  "url": "updateStatus",
+		  "data": {"prdID":id,"prdStatus":status},
+		  "dataType": "JSON",
+		  success: function(response) {
+			    console.log('received this response: '+response);
+			    	
+		  		if(status ==  'inactive' ){
+							thiss.removeClass('btn-success').addClass('btn-danger');
+		  					thiss.prop('value', 'active');
+		  					thiss.data("status",'active');
+
+		  		}
+		  		else if(status == 'active'){
+				  			thiss.removeClass('btn-danger').addClass('btn-success');
+		  					thiss.prop('value', 'inactive');
+		  					thiss.data("status",'inactive');
+				  		}
+				  	toastr.success(response['message']);
+			},
+			error: function(response){
+				toastr.error(response['message']);
+			}
+		});
+	});
 });

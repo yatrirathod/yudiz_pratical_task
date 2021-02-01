@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
-</style>
       <!-- Main Content -->
       <div id="wrapper">
         @include('layouts.Sidebar')
@@ -13,7 +11,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">Frequently Used Project</h1>
           </div>
          <!-- Content Row -->
           <div class="row">
@@ -31,25 +29,30 @@
 
             <script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
           </div>
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Content Column -->
-            
-
-            <!-- <div class="col-lg-6 mb-4"> -->
-
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="prdTable" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>#NO</th>
+                      <th>ProductName</th>
+                    </tr>
+                  </thead>
+                  <tbody id="productTbody">
+                    @foreach($getTopSellingPrd as $prd)
+                    <tr>
+                      <td>{{$no++}}</td>
+                      <td>{{$prd->name}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
               </div>
-
-              <!-- Approach -->
-              <div class="card shadow mb-4">
-              </div>
-
-            <!-- </div> -->
+            </div>
           </div>
+            
+          
 
         </div>
       
@@ -59,5 +62,4 @@
         <script src="https://www.amcharts.com/lib/3/serial.js"></script>
         <script src="http://www.amcharts.com/lib/3/pie.js"></script>
         <script src="https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js"></script>
-        <script src="{{ asset('public/js/morish.js')}}" type="text/javascript"></script>
 @endsection

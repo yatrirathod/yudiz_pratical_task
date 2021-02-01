@@ -15,22 +15,29 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+//admin
+Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
+Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
+Route::post('/login/admin', 'Auth\LoginController@adminLogin');
+Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::get('/', function () {
     return view('welcome');
 	});
-Route::group(['middleware' => ['auth']], function() {
-
-	Route::get('/home', 'HomeController@index')->name('home');
-	
-	//PRODUCT
-	Route::get('productListing','ProductController@index')->name('productListing');
-	Route::post('productInsert','ProductController@insert');
-	Route::get('productEdit','ProductController@edit')->name('prdEdit');
-	Route::post('productUpdate/{id}','ProductController@update');
-	Route::get('productDelete','ProductController@delete')->name('prdDelete');
+Route::group(['middleware' => ['auth']], function() 
+{
+	//ADMIN DASHBOARD
+    Route::get('/home', 'Admin\HomeController@index')->name('home');
+    //PRODUCT
+	Route::get('productListing','Admin\ProductController@index')->name('productListing');
+	Route::post('productInsert','Admin\ProductController@insert');
+	Route::get('productEdit','Admin\ProductController@edit')->name('prdEdit');
+	Route::post('productUpdate/{id}','Admin\ProductController@update');
+	Route::get('productDelete','Admin\ProductController@delete')->name('prdDelete');
+	Route::get('updateStatus','Admin\ProductController@updatestatus')->name('prd.statusUpdate');
 	//ORDER
 	Route::get('orderListing','Admin\OrderController@getorderdetails')->name('orders');
-	//FRONTEND 
+
+    //FRONTEND 
 	Route::get('product','Frontend\FrontendController@index')->name('customer.productList');
 	//CART
 	Route::post('add-to-cart','Frontend\CartController@addtocart');
@@ -42,8 +49,3 @@ Route::group(['middleware' => ['auth']], function() {
 	//Checkout
 	Route::post('/checkout','Frontend\CheckoutController@checkouttocart');
 });
-//admin
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
-Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
-Route::post('/login/admin', 'Auth\LoginController@adminLogin');
-Route::post('/register/admin', 'Auth\RegisterController@createAdmin');

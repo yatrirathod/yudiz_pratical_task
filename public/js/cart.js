@@ -119,6 +119,18 @@
                 success: function (response) {
                     toastr.success(response.status);
                     window.location.reload();
+                    $.ajax({
+                        "method": 'GET',
+                        "url": 'clear-cart',
+                        success: function (response) {
+                            toastr.success(response.status);
+                            window.location.reload();
+                        }
+                    });
+                },
+                error: function(response){
+                    console.log(response);
+                    toastr.error(response.responseJSON['message']);
                 }
             });
         });

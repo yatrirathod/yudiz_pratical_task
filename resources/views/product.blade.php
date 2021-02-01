@@ -33,7 +33,11 @@
                       <td id="name{{$prdDatas->id}}">{{$prdDatas->name}}</td>
                       <td id="quqntity{{$prdDatas->id}}">{{$prdDatas->quantity}}</td>
                       <td id="price{{$prdDatas->id}}">{{$prdDatas->price}}</td>
-                      <td id="status">{{$prdDatas->status}}</td>
+                      @if($prdDatas->status == 'active')
+                      <td class="td-status" id="status"><input data-id="{{$prdDatas->id}}" data-status="{{$prdDatas->status}}" class="btn btn-success btn-status" id="active" type="button" value="active"></td>
+                      @else
+                      <td class="td-status" id="status"><input data-id="{{$prdDatas->id}}" data-status="{{$prdDatas->status}}" class="btn btn-danger btn-status" id="pause" type="button" value="inactive"></td>
+                      @endif
                       <td>
                         <a class="btn-edit" data-id="{{$prdDatas->id}}"><i class="fa fa-edit fa-sm" style="color:blue;"></i></a>
                         <a class="btn-delete" data-id="{{$prdDatas->id}}"><i class="fa fa-trash fa-sm" aria-hidden="true" style="color:red;"></i></a>

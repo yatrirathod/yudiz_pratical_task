@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
+
 <style>
   .badge {
   padding-left: 9px;
@@ -44,15 +45,17 @@
                             <img src="{{ asset('/public/images/products/thumb-1.jpg') }}" class="w-100" alt="Product 1" style="height: 50%; width:25%;">
                             <h4>{{$prd->name}}</h4><p class="card-text">Rs-{{$prd->price}}</p>
                             <input type="hidden" class="product_id{{$prd->id}}" value="{{$prd->id}}"> <!-- Your Product ID -->
-                            <input type="text" class="qty-input{{$prd->id}}" value="{{$prd->quantity}}"><!-- Your Number of Quantity -->
+                            <input type="text" class="qty-input{{$prd->id}}" value="1"><!-- Your Number of Quantity -->
                             <button type="button" class="add-to-cart-btn btn btn-primary" data-id="{{$prd->id}}">Add to Cart</button>
                         </div>
                         @endforeach
+                      {{ $productData->links() }}
                     </div>
                 </div>
               </div>
             </div>
           </div>
         
+
 
 @endsection

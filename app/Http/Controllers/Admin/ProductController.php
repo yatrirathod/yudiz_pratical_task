@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Response;
@@ -21,7 +22,7 @@ class ProductController extends Controller
     //LISTING
     public function index(){
 
-    	$productData = Product::where('status','=','active')->get();
+    	$productData = Product::get();
     	return view('product',['productData' => $productData]);
     }
     // STORE PRODUCT
@@ -76,5 +77,34 @@ class ProductController extends Controller
         $data['productDelete'] = $deleteProductDetails;
         
         return Response::json($data); 
+    }
+    //UPDATE STATUS
+    public function updatestatus(Request $request){
+        $data = array();
+        $id = $request->get('prdID');
+        $status = $request->get('prdStatus');
+
+        if($id && $status == 'inactive'){
+            $product = Product::where('id','=',$id)->update(['status' => 'active']);
+            $data['status'] = $status;
+            $data['success'] = 'success';
+            $data['message'] =  'Product has Activated Successfully';
+        }
+        elseif($id && $status == 'active'){
+            $product = Product::where('id','=',$id)->update(['status' => 'inactive']);
+
+            $data['status'] = $status;          
+            $data['success'] = 'success';
+            $data['message'] = "Product has been InActived Successfully"; 
+        }
+        else{
+
+            $data['error'] = 'error';
+            $data['message'] = 'Status has not been Updated Please Check it.';
+            
+        }
+        
+        return Response::json($data);
+
     }
 }

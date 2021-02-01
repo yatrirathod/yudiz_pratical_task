@@ -12,7 +12,7 @@ class FrontendController extends Controller
     //LISTING
     public function index(){
 
-    	$productData = Product::where('status','=','active')->get();
+    	$productData = Product::where('status','=','active')->paginate(15);
     	return view('frontend.productList',['productData' => $productData]);
     }
 }

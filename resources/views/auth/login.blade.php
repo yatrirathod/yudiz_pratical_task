@@ -13,7 +13,7 @@
                     @else
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                     @endisset
-                        @csrf
+                        {{ csrf_field() }}
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
